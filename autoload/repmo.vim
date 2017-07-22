@@ -1,7 +1,7 @@
 " File:         repmo.vim
 " Created:      2016 Nov 16
-" Last Change:  2016 Nov 22
-" Version:      0.4
+" Last Change:  2017 Jun 09
+" Version:      0.5
 " Author:       Andy Wokula <anwoku@yahoo.de>
 " License:      Vim License, see :h license
 
@@ -12,19 +12,16 @@ endif
 
 func! repmo#Key(key, revkey) "{{{
     if v:count >= 1
-	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count})
+	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count, 'remap': 1})
     endif
     return a:key
 endfunc "}}}
 
-func! repmo#PlugKey(key, revkey) "{{{
+func! repmo#SelfKey(key, revkey) "{{{
     if v:count >= 1
-	call extend(s:last, {'repmo': 1,
-	    \ 'key': "\<Plug>(repmo-". a:key. ")",
-	    \ 'revkey': "\<Plug>(repmo-". a:revkey. ")",
-	    \ 'count': v:count})
-	exec 'noremap <Plug>(repmo-'. a:key. ') '. a:key
-	exec 'noremap <Plug>(repmo-'. a:revkey. ') '. a:revkey
+	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count, 'remap': 0})
+	exec "noremap <Plug>(repmo-lastkey) \<C-V>". a:key
+	exec "noremap <Plug>(repmo-lastrevkey) \<C-V>". a:revkey
     endif
     return a:key
 endfunc "}}}
@@ -33,11 +30,13 @@ func! repmo#LastKey(zaprepkey) "{{{
     " {zaprepkey}   (string) one of ';' or ''
     if !empty(a:zaprepkey) && !get(s:last, 'repmo', 0)
 	return a:zaprepkey
-    elseif v:count >= 1
+    endif
+    let lastkey = get(s:last, 'remap', 1) ? get(s:last, 'key', '') : "\<Plug>(repmo-lastkey)"
+    if v:count >= 1
 	let s:last.count = v:count
-	return get(s:last, 'key', '')
+	return lastkey
     else
-	return get(s:last, 'count', ''). get(s:last, 'key', '')
+	return get(s:last, 'count', ''). lastkey
     endif
 endfunc "}}}
 
@@ -45,11 +44,13 @@ func! repmo#LastRevKey(zaprepkey) "{{{
     " {zaprepkey}   (string) one of ',' or ''
     if !empty(a:zaprepkey) && !get(s:last, 'repmo', 0)
 	return a:zaprepkey
-    elseif v:count >= 1
+    endif
+    let lastrevkey = get(s:last, 'remap', 1) ? get(s:last, 'revkey', '') : "\<Plug>(repmo-lastrevkey)"
+    if v:count >= 1
 	let s:last.count = v:count
-	return get(s:last, 'revkey', '')
+	return lastrevkey
     else
-	return get(s:last, 'count', ''). get(s:last, 'revkey', '')
+	return get(s:last, 'count', ''). lastrevkey
     endif
 endfunc "}}}
 
