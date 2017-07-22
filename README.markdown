@@ -58,6 +58,16 @@ It's possible to make it work with scripts like [Fanfingtastic](https://github.c
     :map <expr> t repmo#ZapKey('<Plug>fanfingtastic_t')|sunmap t
     :map <expr> T repmo#ZapKey('<Plug>fanfingtastic_T')|sunmap T
 
+or if you like [Sneak](https://github.com/justinmk/vim-sneak):
+
+    :map <expr> ; repmo#LastKey('<Plug>Sneak_;')|sunmap ;
+    :map <expr> , repmo#LastRevKey('<Plug>Sneak_,')|sunmap ,
+
+    :map <expr> f repmo#ZapKey('<Plug>Sneak_f')|sunmap f
+    :map <expr> F repmo#ZapKey('<Plug>Sneak_F')|sunmap F
+    :map <expr> t repmo#ZapKey('<Plug>Sneak_t')|sunmap t
+    :map <expr> T repmo#ZapKey('<Plug>Sneak_T')|sunmap T
+
 ## Notes
 
 The odd term "zap-key" means one of `f`, `F`, `t`, `T`, `;` or `,` (no text is deleted!).
