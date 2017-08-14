@@ -79,6 +79,10 @@ The odd term "zap-key" means one of `f`, `F`, `t`, `T`, `;` or `,` (no text is d
 Requires a not-too-old Vim which correctly handles a [count] typed before an
 &lt;expr> mapping.
 
+## Related
+
+Looks like [vim-expand-region](https://github.com/landock/vim-expand-region) has a similar purpose.
+
 ## License
 
 Copyright (c) Andy Wokula.  The Vim License applies.
