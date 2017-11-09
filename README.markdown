@@ -11,6 +11,8 @@ count.
 
 ## Configuration
 
+### Mappings
+
 There is no plugin file, mappings should be defined in the vimrc.
 
     " map a motion and its reverse motion:
@@ -42,6 +44,15 @@ Alternative repetition keys:
     :map <expr> <Space> repmo#LastKey('')|sunmap <Space>
     :map <expr> <BS>    repmo#LastRevKey('')|sunmap <BS>
 
+### Variables
+
+`g:repmo_require_count` boolean (default 0)
+
+If non-zero, a repetition key like `;` only repeats the last motion for which a count was given.  This used to be the only available option.  If zero, `;` repeats any last motion, this is the new default!  You can change the value at any time.
+
+If you want the old behavior back, put in your vimrc
+
+    :let g:repmo_require_count = 1
 
 ## Foreign scripts support
 
@@ -78,6 +89,8 @@ The odd term "zap-key" means one of `f`, `F`, `t`, `T`, `;` or `,` (no text is d
 
 Requires a not-too-old Vim which correctly handles a [count] typed before an
 &lt;expr> mapping.
+
+The leading colons are only for readability, nevertheless Vim treats them as whitespace.
 
 ## Related
 
