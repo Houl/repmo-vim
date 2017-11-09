@@ -1,12 +1,12 @@
 " File:         repmo.vim
 " Created:      2016 Nov 16
-" Last Change:  2017 Nov 08
-" Version:      0.6
+" Last Change:  2017 Nov 09
+" Version:      0.7
 " Author:       Andy Wokula <anwoku@yahoo.de>
 " License:      Vim License, see :h license
 
 if !exists("g:repmo_require_count")
-    let g:repmo_require_count = 1
+    let g:repmo_require_count = 0
 endif
 
 " Items: key (string), revkey (string), count (number), repmo (boolean)
