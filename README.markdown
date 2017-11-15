@@ -4,6 +4,10 @@ Rewrite of
 [plugin/repmo.vim](http://vim.sf.net/scripts/script.php?script_id=2174),
 the script is simpler now, and autoloaded.
 
+With repmo, you can map keys and make them repeatable with a key.  Repmo is targeted at motions and scroll commands, because for each mapped key you need to specify an opposite key.
+
+For technical reasons, there are two functions: `repmo#SelfKey()` must be used when mapping a builtin key to itself, `repmo#Key()` is for the other cases.
+
 New Feature: Typing `[count];` (given you mapped `;`) updates the remembered
 count.
 
