@@ -16,14 +16,14 @@ endif
 
 func! repmo#Key(key, revkey, ...) "{{{
     if v:count >= 1 || (!g:repmo_require_count && !get(a:, 1, 0))
-	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count1, 'remap': 1})
+	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count, 'remap': 1})
     endif
     return a:key
 endfunc "}}}
 
 func! repmo#SelfKey(key, revkey, ...) "{{{
     if v:count >= 1 || (!g:repmo_require_count && !get(a:, 1, 0))
-	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count1, 'remap': 0})
+	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count, 'remap': 0})
 	exec "noremap <Plug>(repmo-lastkey) \<C-V>". a:key
 	exec "noremap <Plug>(repmo-lastrevkey) \<C-V>". a:revkey
     endif
@@ -39,8 +39,10 @@ func! repmo#LastKey(zaprepkey) "{{{
     if v:count >= 1
 	let s:last.count = v:count
 	return lastkey
+    elseif get(s:last, 'count', 0) >= 1
+	return s:last.count . lastkey
     else
-	return get(s:last, 'count', ''). lastkey
+	return lastkey
     endif
 endfunc "}}}
 
@@ -53,8 +55,10 @@ func! repmo#LastRevKey(zaprepkey) "{{{
     if v:count >= 1
 	let s:last.count = v:count
 	return lastrevkey
+    elseif get(s:last, 'count', 0) >= 1
+	return s:last.count . lastrevkey
     else
-	return get(s:last, 'count', ''). lastrevkey
+	return lastrevkey
     endif
 endfunc "}}}
 
