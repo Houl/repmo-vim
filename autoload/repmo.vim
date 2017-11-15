@@ -1,7 +1,7 @@
 " File:         repmo.vim
 " Created:      2016 Nov 16
-" Last Change:  2017 Nov 09
-" Version:      0.7
+" Last Change:  2017 Nov 15
+" Version:      0.8
 " Author:       Andy Wokula <anwoku@yahoo.de>
 " License:      Vim License, see :h license
 
@@ -14,15 +14,15 @@ if !exists("s:last")
     let s:last = {}
 endif
 
-func! repmo#Key(key, revkey) "{{{
-    if v:count >= 1 || !g:repmo_require_count
+func! repmo#Key(key, revkey, ...) "{{{
+    if v:count >= 1 || (!g:repmo_require_count && !get(a:, 1, 0))
 	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count1, 'remap': 1})
     endif
     return a:key
 endfunc "}}}
 
-func! repmo#SelfKey(key, revkey) "{{{
-    if v:count >= 1 || !g:repmo_require_count
+func! repmo#SelfKey(key, revkey, ...) "{{{
+    if v:count >= 1 || (!g:repmo_require_count && !get(a:, 1, 0))
 	call extend(s:last, {'repmo': 1, 'key': a:key, 'revkey': a:revkey, 'count': v:count1, 'remap': 0})
 	exec "noremap <Plug>(repmo-lastkey) \<C-V>". a:key
 	exec "noremap <Plug>(repmo-lastrevkey) \<C-V>". a:revkey
