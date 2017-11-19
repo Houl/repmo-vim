@@ -37,6 +37,10 @@ There is no plugin file, mappings should be defined in the vimrc.
     :noremap <expr> t repmo#ZapKey('t')|sunmap t
     :noremap <expr> T repmo#ZapKey('T')|sunmap T
 
+With argument, you can make `f` remember the count (same for `F`, `t` and `T`):
+
+    :noremap <expr> f repmo#ZapKey('f', 1)|sunmap f
+
 Scroll commands work too:
 
     :noremap <expr> <C-E> repmo#SelfKey('<C-E>', '<C-Y>')
