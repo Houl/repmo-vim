@@ -6,7 +6,7 @@ the script is simpler now, and autoloaded.
 
 With repmo, you can map keys and make them repeatable with a key.  Repmo is targeted at motions and scroll commands, because for each mapped key you need to specify an opposite key.
 
-For technical reasons, there are two functions: `repmo#SelfKey()` must be used when mapping a builtin key to itself, `repmo#Key()` is for the other cases.
+For key mapping there are two functions: `repmo#SelfKey()` indicates _remapping off_ (required when mapping a builtin key to itself), `repmo#Key()` indicates _remapping on_ (usually for everything else).  The indicator is used by repetition keys.
 
 New Feature: Typing `[count];` (given you mapped `;`) updates the remembered
 count.
@@ -24,8 +24,8 @@ There is no plugin file, mappings should be defined in the vimrc.
     :noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 
     " if you like `:noremap j gj', you can keep that:
-    :noremap <expr> j repmo#Key('gj', 'gk')|sunmap j
-    :noremap <expr> k repmo#Key('gk', 'gj')|sunmap k
+    :map <expr> j repmo#Key('gj', 'gk')|sunmap j
+    :map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
     " repeat the last [count]motion or the last zap-key:
     :map <expr> ; repmo#LastKey(';')|sunmap ;
@@ -46,7 +46,7 @@ Scroll commands work too:
     :noremap <expr> <C-E> repmo#SelfKey('<C-E>', '<C-Y>')
     :noremap <expr> <C-Y> repmo#SelfKey('<C-Y>', '<C-E>')
 
-Alternative repetition keys:
+Alternative repetition keys (also working in addition to `;` and `,`):
 
     " repeat the last [count]motion:
     :map <expr> <Space> repmo#LastKey('')|sunmap <Space>
@@ -64,7 +64,9 @@ If you want the old behavior back, put in your vimrc
 
 ## Foreign scripts support
 
-It's possible to make it work with scripts like [Fanfingtastic](https://github.com/dahu/vim-fanfingtastic):
+If you want to use `;` and `,` for repetition, then this may raise conflicts with foreign scripts.  But you can set up repmo to work together with many of these scripts:
+
+Make it work with [Fanfingtastic](https://github.com/dahu/vim-fanfingtastic):
 
     " Do not map fanfingtastic keys:
     :let g:fing_enabled = 0
