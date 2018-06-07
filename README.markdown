@@ -1,7 +1,7 @@
 # repmo.vim
 
 Rewrite of
-[plugin/repmo.vim](http://vim.sf.net/scripts/script.php?script_id=2174),
+[plugin/repmo.vim](https://www.vim.org/scripts/script.php?script_id=2174),
 the script is simpler now, and autoloaded.
 
 With repmo, you can map keys and make them repeatable with a key.  Repmo is targeted at motions and scroll commands, because for each mapped key you need to specify an opposite key.
